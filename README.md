@@ -1,6 +1,6 @@
 # VorTeX: A Formally Verified TeX using Document Calculus, and a Device-Specification Interface
 
-~~~UNDER CONSTRUCTION~~~
+**UNDER CONSTRUCTION**
 
 VorTeX is not just an implementation of D. E. Knuth's TeX system in Objective Caml (a.k.a OCaml). Rather, it comes with ForTeX. ForTeX is the *formal verification* of TeX using Crichton & Krishnamurthi's "Document Calculus" (2024, ACM).
 
