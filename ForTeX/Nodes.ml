@@ -10,28 +10,47 @@ type node =
   | NODE_Rule of rule_node
   | NODE_Math of math_node
   | NODE_Char of char_node
+  | NODE_Whatsit of whatsit_node
 
 and hbox_node =
   { content : node list
   ; width   : dimen
+  ; depth   : dimen
+  ; height  : dimen
+  ; shift   : dimen
+  ; glue    : glue_node
   }
 
 and vbox_node =
   { content : node list
   ; height  : dimen
+  ; width   : dimen
+  ; height  : dimen
+  ; shift   : dimen
+  ; glue    : glue_node
   }
 
 and glue_node =
   { space   : dimen
-  ; stretch : dimen
-  ; shrink  : dimen
+  ; stretch : (dimen * glue_order)
+  ; shrink  : (dimen * glue_order)
   }
 
+and glue_order = 
+  | Fil
+  | Fill
+  | Filll
+
 and kern_node =
-  { amount : dimen }
+  { amount   : dimen
+  ; explicit : bool
+  }
 
 and penalty_node =
-  { value  : dimen }
+  { value  : float
+  ; cost   : float
+  ; eject  : bool
+  }
 
 and disc_node =
   { pre      : node list
@@ -42,10 +61,13 @@ and disc_node =
 and insert_node =
   { content  : node list
   ; offset   : dimen
+  ; cost     : float
   }
 
 and ligature_node =
-  { characters : char_node list }
+  { represents : string
+  ; characters : char_node list 
+  }
 
 and rule_node =
   { width      : dimen
@@ -53,9 +75,18 @@ and rule_node =
   }
 
 and math_node =
-  { expression : string }
+  { display_mode : bool
+  ; expression   : string
+  }
 
 and char_node =
-  { encoding: int
-  ; value   : int
+  { char_value   : int
+  ; encoding     : encoding_info
+  ; typeface     : typeface_info
   }
+
+and mark_node = 
+  { size          : int }
+
+and whatsit_node =
+  { params        : int }
